@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
+use Cocur\Slugify\Slugify;
 use App\Repository\AdRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AdRepository::class)
+ *   * @ORM\HasLifecycleCallbacks
  */
 class Ad
 {
@@ -73,7 +77,7 @@ class Ad
     private $transmission;
 
     /**
-     * @ORM\Column(type="text", length=255)
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -87,6 +91,29 @@ class Ad
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="AD", orphanRemoval=true)
+     */
+    private $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
+
+    /**
+     * Permet d'initialiser le slug automatiquement s'il n'est pas fourni 
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
+     */
+    public function initializeSlug(){
+        if(empty($this->slug)){
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->title);
+        }
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -259,4 +286,35 @@ class Ad
 
         return $this;
     }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setAD($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getAD() === $this) {
+                $image->setAD(null);
+            }
+        }
+
+        return $this;
+    }
 }
+
