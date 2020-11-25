@@ -92,6 +92,7 @@ class Ad
     private $slug;
 
     /**
+<<<<<<< HEAD
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="AD", orphanRemoval=true)
      */
     private $images;
@@ -102,6 +103,8 @@ class Ad
     }
 
     /**
+=======
+>>>>>>> 681e4fb934b5bb4862e3a8436f1ebd4e1e994bc9
      * Permet d'initialiser le slug automatiquement s'il n'est pas fourni 
      * @ORM\PrePersist
      * @ORM\PreUpdate
