@@ -67,7 +67,7 @@ class Ad
     private $fuel;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $circulationYear;
 
@@ -92,7 +92,6 @@ class Ad
     private $slug;
 
     /**
-<<<<<<< HEAD
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="AD", orphanRemoval=true)
      */
     private $images;
@@ -103,8 +102,6 @@ class Ad
     }
 
     /**
-=======
->>>>>>> 681e4fb934b5bb4862e3a8436f1ebd4e1e994bc9
      * Permet d'initialiser le slug automatiquement s'il n'est pas fourni 
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -114,7 +111,7 @@ class Ad
     public function initializeSlug(){
         if(empty($this->slug)){
             $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->title);
+            $this->slug = $slugify->slugify($this->brand);
         }
     }
     public function getId(): ?int

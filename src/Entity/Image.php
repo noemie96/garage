@@ -31,7 +31,7 @@ class Image
      * @ORM\ManyToOne(targetEntity=Ad::class, inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Ad;
+    private $ad;
 
     public function getId(): ?int
     {
@@ -64,12 +64,12 @@ class Image
 
     public function getAd(): ?Ad
     {
-        return $this->Ad;
+        return $this->ad;
     }
 
-    public function setAd(?Ad $Ad): self
+    public function setAd(?Ad $ad): self
     {
-        $this->Ad = $Ad;
+        $this->ad = $ad;
 
         return $this;
     }
