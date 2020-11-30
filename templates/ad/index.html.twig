@@ -7,22 +7,23 @@
         <h1 class="my-3">Voici les annonces</h1>
         <div class="row">
         {% for ad in ads %}
+         {% set url = path('ads_voiture', {'slug': ad.slug}) %}
             <div class="col-md-4">
                 <div class="card bg-light mb-3">
                     <div class="card-header text-center">
-                         {{ad.brand}}chambres, <strong> {{ad.model}}€</strong>
+                        <h4> Marque: {{ad.brand}} <strong> {{ad.price}}€</strong></h4>
                     </div>
-                    <a href="#">
+                    <a href="{{url}}">
                         <img src="{{ ad.image }}" alt="image de {{ ad.brand }}" class="starsimg">
                     </a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            {{ad.brand}}
+                            {{ad.brand}} {{ad.model}}
                         </h4>
                         <p class="card-text">
-                            {{ad.description}}
+                            {{ad.description | raw}}
                         </p>
-                        <a href="#" class="btn btn-secondary">En savoir plus</a>
+                        <a href="{{url}}" class="btn btn-secondary">En savoir plus</a>
                     </div>
                 </div>
             </div>

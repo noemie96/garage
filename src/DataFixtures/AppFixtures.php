@@ -16,16 +16,13 @@ class AppFixtures extends Fixture
         $faker = Factory::create('FR-fr');
         //$slugify = new Slugify();
         
-        for($a = 1; $a <= 30; $a++){
+        for($a = 1; $a <= 10; $a++){
             $ad = new Ad();
-            $brand = $faker->sentence();
+            $brand = $faker->sentence($nbWords = 1, $variableNbWords = true);
             //$slug = $slugify->slugify($brand);
             //$image = $faker->imageUrl(1000,350);
-            $model = $faker->paragraph(2);
+            $model = $faker->sentence($nbWords = 2, $variableNbWords = true);
             $description = '<p>'.join('</p><p>',$faker->paragraphs(1)).'</p>';
-            //$numberOfOwners = $faker->rand(1,3);
-            //$displacement = $faker->rand(400,1000);
-            //$power = $faker->rand(1000,20000);
             $fuel = $faker->sentence();
             $circulationYear = $faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = null);
             $transmission = $faker->sentence();
