@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
                 ->setModel($model)
                 ->setDescription($description)
                 ->setPrice(rand(400,20000))
-                ->setKm(rand(1,5))
+                ->setKm(rand(100000,500000))
                 ->setNumberOfOwners(rand(1,3))
                 ->setDisplacement(rand(400,1000))
                 ->setPower(rand(1000,20000))

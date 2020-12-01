@@ -1,27 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Création d'une annonce{% endblock %}
+
+
 {% form_theme myForm _self %}
+
 {% block body %}
     <div class="container">
         <h1>Création d'une nouvelle annonce</h1>
-        
-
+        {# {{ form(myForm) }} #}
         {{ form_start(myForm) }}
-
             {{form_widget(myForm)}}
                 <button type="submit" class="btn btn-primary">Création d'une annonce</button>
         {{ form_end(myForm) }}
-
     </div>
-{% endblock %} 
+{% endblock %}
+
 {% block _annonce_images_widget %}
     {# Définition du champ annonce_image, la variable form correspond au champ annonce_image #}
     <p>Ici, vous pouvez ajouter vos propres images</p>
     {{ form_widget(form) }}
     <input type="hidden" id="widgets-counter" value="0">
     <div class="form-group">
-        <button type="button" id="add-image" class="btn btn-primary">Ajouter une image</button>
+    <button type="button" id="add-image" class="btn btn-primary">Ajouter une image</button>
     </div>
 {% endblock %}
 
@@ -100,3 +101,4 @@
         handleDeleteButtons()
     </script>
 {% endblock %}
+

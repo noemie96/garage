@@ -7,10 +7,16 @@ use App\Repository\AdRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=AdRepository::class)
  *   * @ORM\HasLifecycleCallbacks
+ *  * @UniqueEntity(
+ *  fields={"brand"},
+ *  message="Une autre annonce possède déjà ce titre, merci de le modifier"
+ * )
  */
 class Ad
 {
@@ -47,7 +53,7 @@ class Ad
     private $price;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float",nullable=true)
      */
     private $numberOfOwners;
 
@@ -57,7 +63,7 @@ class Ad
     private $displacement;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @ORM\Column(type="integer", precision=10, scale=2)
      */
     private $power;
 
@@ -78,6 +84,7 @@ class Ad
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min=20, minMessage="Votre description doit faire plus de 20 caractères")
      */
     private $description;
 
@@ -87,12 +94,13 @@ class Ad
     private $othersOption;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
 
     /**
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="AD", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $images;
 
