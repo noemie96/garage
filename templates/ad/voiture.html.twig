@@ -17,12 +17,12 @@
             {{ad.description | raw }}
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    {% for image in ad.image %}
+                    {% for image in ad.images %}
                         <li data-target="#carouselExampleCaptions" data-slide-to="{{ loop.index0 }}" {% if loop.first %} class="active" {% endif %}></li>    
                     {% endfor %}
                 </ol>
                 <div class="carousel-inner">
-                    {% for image in ad.image %}
+                    {% for image in ad.images %}
                         <div class="carousel-item {% if loop.first %}active{% endif %}">
                             <img src="{{ image.url }}" class="d-block w-100" alt="image de {{ ad.brand }}">
                             <div class="carousel-caption d-none d-md-block">
@@ -63,7 +63,35 @@
     </tr>
     <tr>
       <th scope="row">Km</th>
-      <td>{{ad.km}}</td>
+      <td>{{ad.km}}Km</td>
+    </tr>
+     <tr>
+      <th scope="row">nombre d'anciens propiétaires</th>
+      <td>{{ad.numberOfOwners}}</td>
+    </tr>
+     <tr>
+      <th scope="row">Cylindrée</th>
+      <td>{{ad.displacement}}m2</td>
+    </tr>
+     <tr>
+      <th scope="row">Puissance</th>
+      <td>{{ad.power}}</td>
+    </tr>
+     <tr>
+      <th scope="row">Carburant</th>
+      <td>{{ad.fuel}}</td>
+    </tr>
+     <tr>
+      <th scope="row">Transmission</th>
+      <td>{{ad.transmission}}</td>
+    </tr>
+     <tr>
+      <th scope="row">Description de la voiture</th>
+      <td>{{ad.description | raw}}</td>
+    </tr>
+     <tr>
+      <th scope="row">Autres options</th>
+      <td>{{ad.othersOption | raw}}</td>
     </tr>
   </tbody>
 </table>

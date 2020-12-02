@@ -99,7 +99,7 @@ class Ad
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="AD", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="ad", orphanRemoval=true)
      * @Assert\Valid()
      */
     private $images;
